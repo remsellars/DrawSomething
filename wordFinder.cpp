@@ -31,9 +31,11 @@ int main (void)
     std::vector<std::string> dictionary;
     std::string userLetters;
     std::map<char, int> alphabetMap;
-
     fillAlphabetMap(alphabetMap);
+	TwoCharDictionary test();
+
     numLetters = getUserWordSize();
+
 //Call to function to get word list from file
 // FUTURE UPDATE: Get words from a class instead of external text file so that the text file is not included in the package
     dictionary = getDictionary(numLetters);

@@ -1,0 +1,4 @@
+m_Word[0]="cd";
+m_Word[1]="dj";
+m_Word[2]="no";
+m_Word[3]="tv";
