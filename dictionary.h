@@ -19,7 +19,48 @@ class TwoCharDictionary : public Dictionary{
 		void fillDictionary();
 };
 
+class ThreeCharDictionary : public Dictionary{
+	public:
+		ThreeCharDictionary(){};	
+		~ThreeCharDictionary(){};
+		void fillDictionary();
+};
 
+class FourCharDictionary : public Dictionary{
+	public:
+		FourCharDictionary(){};	
+		~FourCharDictionary(){};
+		void fillDictionary();
+};
+
+
+class FiveCharDictionary : public Dictionary{
+	public:
+		FiveCharDictionary(){};	
+		~FiveCharDictionary(){};
+		void fillDictionary();
+};
+
+class SixCharDictionary : public Dictionary{
+	public:
+		SixCharDictionary(){};	
+		~SixCharDictionary(){};
+		void fillDictionary();
+};
+
+class SevenCharDictionary : public Dictionary{
+	public:
+		SevenCharDictionary(){};	
+		~SevenCharDictionary(){};
+		void fillDictionary();
+};
+
+class EightCharDictionary : public Dictionary{
+	public:
+		EightCharDictionary(){};	
+		~EightCharDictionary(){};
+		void fillDictionary();
+};
 
 
 
