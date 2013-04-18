@@ -10,6 +10,7 @@ class Dictionary{
 		virtual std::string getWord(int index)const;
 		virtual void addWord();
 		virtual void fillDictionary()=0;
+		int getSize(){m_Words.size();};
 };
 
 class TwoCharDictionary : public Dictionary{

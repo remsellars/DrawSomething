@@ -40,7 +40,7 @@ int main (void)
 // FUTURE UPDATE: Get words from a class instead of external text file so that the text file is not included in the package
     dictionary = getDictionary(numLetters);
     printDictionary(dictionary);
-    std::cout<<"Number of Words: " << dictionary.size()-1 << std::endl;
+    std::cout<<"Number of Words: " << dictionary.getSize()+1 << std::endl;
     userLetters=getUserLetters();
     catchLetters(alphabetMap, userLetters);
     std::cout << "Your letters are: " << userLetters << std::endl;
