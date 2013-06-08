@@ -1,21 +1,24 @@
 #include <vector>
 #include <string>
 
+#ifndef DICTIONARY
+#define DICTIONARY
 class Dictionary{
-	private:
+	protected:
 		std::vector<std::string> m_Words;
+
 	public:
 		Dictionary(){};	
 		~Dictionary(){};
 		virtual std::string getWord(int index)const;
-		virtual void addWord();
+		//virtual void addWord();
 		virtual void fillDictionary()=0;
-		int getSize(){m_Words.size();};
+		int size(){ return m_Words.size();};
 };
 
 class TwoCharDictionary : public Dictionary{
 	public:
-		TwoCharDictionary(){};	
+		TwoCharDictionary() : Dictionary() {};	
 		~TwoCharDictionary(){};
 		void fillDictionary();
 };
@@ -65,7 +68,7 @@ class EightCharDictionary : public Dictionary{
 
 
 
-
+#endif
 
 
 

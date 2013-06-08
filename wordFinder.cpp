@@ -22,6 +22,7 @@ void printDictionary(std::vector<std::string> dictionary);
 void catchLetters(std::map<char, int>& alphaMap, std::string userLetters);
 bool wordSearch(std::map<char, int>& alphaMap, std::string words);
 void findWords(std::vector<std::string> dictionary, std::map<char, int> alphaMap, std::string userLetters);
+std::vector<std::string> getDictionaryTemp(int numLetters);
 
 int main (void)
 {
@@ -38,9 +39,9 @@ int main (void)
 
 //Call to function to get word list from file
 // FUTURE UPDATE: Get words from a class instead of external text file so that the text file is not included in the package
-    dictionary = getDictionary(numLetters);
+    dictionary = getDictionaryTemp(numLetters);
     printDictionary(dictionary);
-    std::cout<<"Number of Words: " << dictionary.getSize()+1 << std::endl;
+    std::cout<<"Number of Words: " << dictionary.size()+1 << std::endl;
     userLetters=getUserLetters();
     catchLetters(alphabetMap, userLetters);
     std::cout << "Your letters are: " << userLetters << std::endl;
@@ -62,6 +63,41 @@ int getUserWordSize(){
              std::cin >> numLetters;
         };
     return numLetters;
+}
+
+std::vector<std::string> getDictionaryTemp(int numLetters){
+	std::vector<std::string> dictionary; 
+	Dictionary* p_Dict;
+	
+	switch(numLetters){
+	  case 2:
+	    p_Dict = new TwoCharDictionary();
+	    break;
+	  case 3:
+	     p_Dict = new ThreeCharDictionary();
+	     break;
+	  case 4:
+	      p_Dict = new FourCharDictionary();
+	      break;
+	  case 5:
+	      p_Dict = new FiveCharDictionary();
+	      break;
+	  case 6:
+	    p_Dict = new SixCharDictionary();
+	    break;
+	  case 7:
+	     p_Dict = new SevenCharDictionary();
+	     break;
+	  case 8:
+	    p_Dict = new EightCharDictionary();
+	    break;
+	  }
+	
+	p_Dict->fillDictionary();
+	for(int i=0; i<p_Dict->size(); ++i){
+		dictionary.push_back(p_Dict->getWord(i));
+	}
+	return dictionary;
 }
 
 ///////FUNCTION: GET DICTIONARY FROM FILE///////
