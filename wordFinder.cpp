@@ -18,34 +18,38 @@ void fillAlphabetMap(std::map<char, int>& alphaMap);
 int getUserWordSize();
 std::string getUserLetters();
 std::vector<std::string> getDictionary(int n);
-void printDictionary(std::vector<std::string> dictionary);
+void printDictionary(Dictionary* p_Dict);
 void catchLetters(std::map<char, int>& alphaMap, std::string userLetters);
 bool wordSearch(std::map<char, int>& alphaMap, std::string words);
-void findWords(std::vector<std::string> dictionary, std::map<char, int> alphaMap, std::string userLetters);
-std::vector<std::string> getDictionaryTemp(int numLetters);
+void findWords(Dictionary* p_Dict, std::map<char, int> alphaMap, std::string userLetters);
+Dictionary* dictionaryFactory(int numLetters);
 
 int main (void)
 {
 
 //initializations
     int numLetters;
-    std::vector<std::string> dictionary;
+    //std::vector<std::string> dictionary;
+    
     std::string userLetters;
     std::map<char, int> alphabetMap;
     fillAlphabetMap(alphabetMap);
-	TwoCharDictionary test();
+    Dictionary* p_Dict;
 
     numLetters = getUserWordSize();
 
 //Call to function to get word list from file
 // FUTURE UPDATE: Get words from a class instead of external text file so that the text file is not included in the package
-    dictionary = getDictionaryTemp(numLetters);
-    printDictionary(dictionary);
-    std::cout<<"Number of Words: " << dictionary.size()+1 << std::endl;
+    //dictionary = getDictionaryTemp(numLetters);
+    p_Dict = dictionaryFactory(numLetters);
+    p_Dict->fillDictionary();
+    printDictionary(p_Dict);
+    std::cout<<"Number of Words: " << p_Dict->size()+1 << std::endl;
     userLetters=getUserLetters();
     catchLetters(alphabetMap, userLetters);
     std::cout << "Your letters are: " << userLetters << std::endl;
-    findWords(dictionary, alphabetMap, userLetters);
+    findWords(p_Dict, alphabetMap, userLetters);
+    delete p_Dict;
     return 0;
 }
 
@@ -65,39 +69,31 @@ int getUserWordSize(){
     return numLetters;
 }
 
-std::vector<std::string> getDictionaryTemp(int numLetters){
-	std::vector<std::string> dictionary; 
-	Dictionary* p_Dict;
-	
+Dictionary* dictionaryFactory(int numLetters){
 	switch(numLetters){
 	  case 2:
-	    p_Dict = new TwoCharDictionary();
+	    return new TwoCharDictionary();
 	    break;
 	  case 3:
-	     p_Dict = new ThreeCharDictionary();
+	     return new ThreeCharDictionary();
 	     break;
 	  case 4:
-	      p_Dict = new FourCharDictionary();
+	      return new FourCharDictionary();
 	      break;
 	  case 5:
-	      p_Dict = new FiveCharDictionary();
+	      return new FiveCharDictionary();
 	      break;
 	  case 6:
-	    p_Dict = new SixCharDictionary();
+	    return new SixCharDictionary();
 	    break;
 	  case 7:
-	     p_Dict = new SevenCharDictionary();
+	     return  new SevenCharDictionary();
 	     break;
 	  case 8:
-	    p_Dict = new EightCharDictionary();
+	    return new EightCharDictionary();
 	    break;
 	  }
 	
-	p_Dict->fillDictionary();
-	for(int i=0; i<p_Dict->size(); ++i){
-		dictionary.push_back(p_Dict->getWord(i));
-	}
-	return dictionary;
 }
 
 ///////FUNCTION: GET DICTIONARY FROM FILE///////
@@ -156,10 +152,10 @@ void fillAlphabetMap(std::map<char, int>& alphaMap)
     }
 }
 
-void printDictionary(std::vector<std::string> dictionary){
-    for (int i=0; i<dictionary.size(); i++)                                        // test line
+void printDictionary(Dictionary* p_Dict){
+    for (int i=0; i<p_Dict->size(); i++)                                        // test line
      {                                                                          // test line
-         std::cout << dictionary[i] << std::endl;                               // test line
+         std::cout << p_Dict->getWord(i) << std::endl;                               // test line
      };
 }
 
@@ -196,11 +192,11 @@ bool wordSearch(std::map<char, int>& alphaMap, std::string word)
     return 1;
 }
 
-void findWords(std::vector<std::string> dictionary, std::map<char, int> alphabetMap, std::string userLetters){
-    for(int i=0; i<dictionary.size()-1; ++i){
+void findWords(Dictionary* p_Dict, std::map<char, int> alphabetMap, std::string userLetters){
+    for(int i=0; i<p_Dict->size()-1; ++i){
         bool foundWord;
-        foundWord = wordSearch(alphabetMap, dictionary[i]);
-        if(foundWord) std::cout << "\t Found: " << dictionary[i] << std::endl;
+        foundWord = wordSearch(alphabetMap, p_Dict->getWord(i));
+        if(foundWord) std::cout << "\t Found: " << p_Dict->getWord(i) << std::endl;
         fillAlphabetMap(alphabetMap);
         catchLetters(alphabetMap, userLetters);
     }
